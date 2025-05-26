@@ -19,7 +19,7 @@ function TeacherDashboard() {
     {
       title: 'Create Meeting',
       icon: <Video className="h-8 w-8 text-indigo-600" />,
-      onClick: () => navigate('/teacher/create-meeting'),
+      onClick: () => window.open("https://meet.google.com/hso-ygrx-fmn", "_blank"),
     },
     {
       title: 'Upload Video Lecture',

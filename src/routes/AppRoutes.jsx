@@ -13,6 +13,8 @@ import AllVideoLec from "../components/AllVideoLec";
 import CheckAssignment from "../components/CheckAssignment";
 import JoinMeeting from "../components/JoinMeeting";
 import UploadAssignment from "../components/UploadAssignment";
+import CheckuploadedAssignment from "../components/CheckuploadedAssignment";
+import UploadVideoLec from "../components/UploadVideoLec";
 
 const AppRoutes = () => (
   <BrowserRouter>
@@ -35,6 +37,9 @@ const AppRoutes = () => (
         <Route path="student/assignments"element={<CheckAssignment />} />
         <Route path="student/join-meeting"element={<JoinMeeting />} />
         <Route path="student/upload-assignment"element={<UploadAssignment/>}/>
+        <Route path="teacher/check-submissions"element={<CheckuploadedAssignment/>}/>
+        <Route path="teacher/upload-lecture" element={<UploadVideoLec />} />
+        
       </Route>
     </Routes>
   </BrowserRouter>

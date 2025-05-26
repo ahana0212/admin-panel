@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 function JoinMeeting() {
   const [meetings, setMeetings] = useState([]);
@@ -8,15 +9,17 @@ function JoinMeeting() {
   useEffect(() => {
     const fetchMeetings = async () => {
       try {
-        // Replace with your actual API endpoint
-        const res = await fetch("/api/meetings");
-        if (!res.ok) {
-          throw new Error("Failed to fetch meetings");
-        }
-        const data = await res.json();
-        setMeetings(data);
+        const token = localStorage.getItem("jwt");
+
+        const res = await axios.get("http://localhost:8000/api/meetings", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        setMeetings(res.data.meetings || []);
       } catch (err) {
-        setError(err.message);
+        setError(err.response?.data?.message || "Failed to fetch meetings");
       } finally {
         setLoading(false);
       }

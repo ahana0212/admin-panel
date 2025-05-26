@@ -83,6 +83,7 @@ const LoginPage = () => {
       const response = await validateOTPforUsers(payload);
       if (response.success) {
         localStorage.setItem("jwt", response.authToken);
+        localStorage.setItem("user", response.user._id);
         localStorage.setItem("role", role);
         navigate("/");
       } else {

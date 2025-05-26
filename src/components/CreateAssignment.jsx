@@ -1,11 +1,14 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 function CreateAssignment() {
+    const user  = localStorage.getItem("user");
     const [formData, setFormData] = useState({
         title: "",
         description: "",
         dueDate: "",
         attachmentUrl: "",
+        _id: user
     });
 
     const [loading, setLoading] = useState(false);
@@ -20,6 +23,8 @@ function CreateAssignment() {
     };
 
     const handleSubmit = async (e) => {
+        if(loading)
+            return;
         e.preventDefault();
         setLoading(true);
         setSuccess("");
@@ -28,28 +33,28 @@ function CreateAssignment() {
         try {
             const token = localStorage.getItem("jwt");
 
-            // const res = await axios.post(
-            //     "/api/assignments/create",
-            //     formData,
-            //     {
-            //         headers: {
-            //             Authorization: `Bearer ${token}`,
-            //             "Content-Type": "application/json",
-            //         },
-            //     }
-            // );
+            const res = await axios.post(
+                "http://localhost:8000/api/assignment/create",
+                formData,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                        "Content-Type": "application/json",
+                    },
+                }
+            );
 
-            // if (res.data.success) {
-            //     setSuccess("Assignment created successfully!");
-            //     setFormData({
-            //         title: "",
-            //         description: "",
-            //         dueDate: "",
-            //         attachmentUrl: "",
-            //     });
-            // } else {
-            //     setError(res.data.message || "Failed to create assignment");
-            // }
+            if (res.data.success) {
+                setSuccess("Assignment created successfully!");
+                setFormData({
+                    title: "",
+                    description: "",
+                    dueDate: "",
+                    attachmentUrl: "",
+                });
+            } else {
+                setError(res.data.message || "Failed to create assignment");
+            }
         } catch (err) {
             setError(err.response?.data?.message || "Server error");
         } finally {
@@ -114,7 +119,6 @@ function CreateAssignment() {
 
                 <button
                     type="submit"
-                    disabled={loading}
                     className="w-full py-2 px-4 bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-700 transition duration-200"
                 >
                     {loading ? "Submitting..." : "Create Assignment"}

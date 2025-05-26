@@ -15,16 +15,17 @@ function UploadVideoLec() {
             setError("All fields are required.");
             return;
         }
-
+        const user = localStorage.getItem("user");
         const formData = new FormData();
         formData.append("title", title);
         formData.append("description", description);
-        formData.append("video", videoFile);
+        formData.append("uploadedBy", user )
+        formData.append("videoFile", videoFile);
 
         try {
             setLoading(true);
             const token = localStorage.getItem("jwt");
-            const response = await axios.post("/api/videos/upload", formData, {
+            const response = await axios.post("http://localhost:8000/api/videos-lecture/upload", formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                     Authorization: `Bearer ${token}`

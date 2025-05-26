@@ -15,7 +15,7 @@ const Sidebar = () => {
       <h2 className="text-xl font-semibold">Admin Menu</h2>
       <nav className="space-y-2">
         <Link to="/" className="block hover:bg-gray-700 p-2 rounded">Home</Link>
-        <Link to="/settings" className="block hover:bg-gray-700 p-2 rounded">Settings</Link>
+        {/* <Link to="/settings" className="block hover:bg-gray-700 p-2 rounded">Settings</Link> */}
         <Link to="/profile" className="block hover:bg-gray-700 p-2 rounded">Profile</Link>
         <Link onClick={logout} to={"/"} className="block hover:bg-gray-700 p-2 rounded">Logout</Link>
       </nav>

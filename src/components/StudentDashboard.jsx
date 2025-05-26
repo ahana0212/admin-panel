@@ -18,7 +18,7 @@ function StudentDashboard() {
         {
             title: "Join Meeting",
             description: "Join live class sessions or discussions.",
-            onClick: () => navigate("/student/join-meeting"),
+            onClick: () => window.open("https://meet.google.com/hso-ygrx-fmn", "_blank"),
         },
         {
             title: "Upload Assignment",

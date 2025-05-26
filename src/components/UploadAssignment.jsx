@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { use, useState } from "react";
 
 function UploadAssignment() {
   const [file, setFile] = useState(null);
@@ -7,19 +7,26 @@ function UploadAssignment() {
   const [submitting, setSubmitting] = useState(false);
 
   const handleSubmit = async (e) => {
+    if(submitting){
+      return;
+    }
     e.preventDefault();
     if (!file || !title) {
       setMessage("Please provide both title and file.");
       return;
     }
-
+    let user = localStorage.getItem("user");
+    if(user == undefined) {
+      user = "682b6f39bcb35c3d8e01ec2a"
+    }
+    console.log(user);
     const formData = new FormData();
     formData.append("title", title);
     formData.append("file", file);
-
+    formData.append("studentId","682b6f39bcb35c3d8e01ec2a");
     try {
       setSubmitting(true);
-      const res = await fetch("/api/assignments/upload", {
+      const res = await fetch("http://localhost:8000/api/uploaded-assignment/upload", {
         method: "POST",
         body: formData,
       });
@@ -69,7 +76,7 @@ function UploadAssignment() {
 
           <button
             type="submit"
-            disabled={submitting}
+            onClick={handleSubmit}
             className="w-full bg-indigo-600 text-white py-2 px-4 rounded hover:bg-indigo-700 transition duration-200"
           >
             {submitting ? "Uploading..." : "Upload Assignment"}

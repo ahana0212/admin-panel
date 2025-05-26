@@ -10,13 +10,13 @@ function CheckuploadedAssignment() {
         const fetchAssignments = async () => {
             try {
                 const token = localStorage.getItem("jwt");
-                const response = await axios.get('/api/assignments/submissions', {
+                const response = await axios.get('http://localhost:8000/api/uploaded-assignment/all', {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     }
                 });
-
-                setAssignments(response.data.submissions || []);
+                console.log(response)
+                setAssignments(response.data || []);
             } catch (err) {
                 setError(err.response?.data?.message || "Failed to fetch assignments");
             } finally {

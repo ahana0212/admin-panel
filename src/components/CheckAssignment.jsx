@@ -8,13 +8,9 @@ function CheckAssignment() {
   useEffect(() => {
     const fetchAssignments = async () => {
       try {
-        // Replace this with your actual API call
-        const response = await fetch("http://localhost:8000/api/assignment"); 
-        if (!response.ok) {
-          throw new Error("Failed to fetch assignments");
-        }
+        const response = await fetch("http://localhost:8000/api/assignment");
+        if (!response.ok) throw new Error("Failed to fetch assignments");
         const data = await response.json();
-        console.log(data)
         setAssignments(data.assignments);
       } catch (err) {
         setError(err.message);
@@ -48,32 +44,36 @@ function CheckAssignment() {
               </tr>
             </thead>
             <tbody>
-              {assignments.length === 0 && (
+              {assignments.length === 0 ? (
                 <tr>
                   <td colSpan="5" className="text-center py-4 text-gray-500">
                     No assignments found.
                   </td>
                 </tr>
+              ) : (
+                assignments.map((assignment) => (
+                  <tr key={assignment._id} className="border-b hover:bg-gray-50">
+                    <td className="py-3 px-6">{assignment.title}</td>
+                    <td className="py-3 px-6">{assignment.description}</td>
+                    <td className="py-3 px-6">
+                      {new Date(assignment.dueDate).toLocaleDateString()}
+                    </td>
+                    <td className="py-3 px-6">
+                      {new Date(assignment.createdAt).toLocaleDateString()}
+                    </td>
+                    <td className="py-3 px-6">
+                      <a
+                        href={`http://localhost:8000/uploads/${assignment.assignmentFile}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-indigo-600 hover:underline"
+                      >
+                        Download
+                      </a>
+                    </td>
+                  </tr>
+                ))
               )}
-
-              {assignments.map((assignment) => (
-                <tr key={assignment._id} className="border-b hover:bg-gray-50">
-                  <td className="py-3 px-6">{assignment.title}</td>
-                  <td className="py-3 px-6">{assignment.description}</td>
-                  <td className="py-3 px-6">{new Date(assignment.dueDate).toLocaleDateString()}</td>
-                  <td className="py-3 px-6">{new Date(assignment.createdAt).toLocaleDateString()}</td>
-                  <td className="py-3 px-6">
-                    <a
-                      href={assignment.fileUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-indigo-600 hover:underline"
-                    >
-                      Download
-                    </a>
-                  </td>
-                </tr>
-              ))}
             </tbody>
           </table>
         </div>
@@ -83,3 +83,4 @@ function CheckAssignment() {
 }
 
 export default CheckAssignment;
+
