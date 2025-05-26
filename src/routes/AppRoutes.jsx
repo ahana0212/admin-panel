@@ -6,13 +6,19 @@ import PrivateRoute from "./PrivateRoute";
 import Settings from "../pages/Settings";
 import Profile from "../pages/Profile";
 import Home from "../pages/home";
-import TableInfo from "../pages/TableInfo";
+import LoginType from "../pages/loginType";
+import StudentList from "../components/StudentList";
+import CreateAssignment from "../components/CreateAssignment";
+import AllVideoLec from "../components/AllVideoLec";
+import CheckAssignment from "../components/CheckAssignment";
+import JoinMeeting from "../components/JoinMeeting";
+import UploadAssignment from "../components/UploadAssignment";
 
 const AppRoutes = () => (
   <BrowserRouter>
     <Routes>
       <Route path="/login" element={<LoginPage />} />
-
+      <Route path="/loginType" element={<LoginType />} />
       <Route
         path="/"
         element={
@@ -23,9 +29,13 @@ const AppRoutes = () => (
         <Route path="/" element={<Home />} />
         <Route path="settings" element={<Settings />} />
         <Route path="profile" element={<Profile />} />
+        <Route path="teacher/students" element={<StudentList />} />
+        <Route path="teacher/create-assignment" element={<CreateAssignment />} />
+        <Route path="student/video-lectures" element={<AllVideoLec />} />
+        <Route path="student/assignments"element={<CheckAssignment />} />
+        <Route path="student/join-meeting"element={<JoinMeeting />} />
+        <Route path="student/upload-assignment"element={<UploadAssignment/>}/>
       </Route>
-
-      <Route path="table/:name" element={<TableInfo />} />
     </Routes>
   </BrowserRouter>
 );

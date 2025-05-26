@@ -1,9 +1,18 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { genrateOTPforLogin, validateOTPforUsers } from "../apis/auth";
 
 const LoginPage = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const role = queryParams.get("role"); // "teacher" or "student"
+
+
+  console.log(role);
+  if (!role) {
+    navigate("/loginType");
+  }
   const [formData, setFormData] = useState({ userName: "", otp: "" });
   const [userId, setUserId] = useState("");
   const [loading, setLoading] = useState(false);
@@ -30,12 +39,12 @@ const LoginPage = () => {
   const handleEmailSubmit = async (e) => {
     e.preventDefault();
     setError("");
-    
+
     if (!formData.userName.trim()) {
       setError("Please enter your email or mobile number");
       return;
     }
-    
+
     try {
       setLoading(true);
       const payload = {
@@ -59,12 +68,12 @@ const LoginPage = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     setError("");
-    
+
     if (!formData.otp.trim()) {
       setError("Please enter the OTP");
       return;
     }
-    
+
     try {
       setLoading(true);
       const payload = {
@@ -74,6 +83,7 @@ const LoginPage = () => {
       const response = await validateOTPforUsers(payload);
       if (response.success) {
         localStorage.setItem("jwt", response.authToken);
+        localStorage.setItem("role", role);
         navigate("/");
       } else {
         setError(response.msg || "Invalid OTP");
@@ -87,7 +97,7 @@ const LoginPage = () => {
 
   const handleResendOTP = async () => {
     if (countdown > 0) return;
-    
+
     setError("");
     try {
       setLoading(true);
@@ -114,7 +124,7 @@ const LoginPage = () => {
         {/* Decorative elements */}
         <div className="absolute -top-12 -right-12 w-24 h-24 bg-pink-500/30 rounded-full blur-xl"></div>
         <div className="absolute -bottom-8 -left-8 w-20 h-20 bg-indigo-500/30 rounded-full blur-xl"></div>
-        
+
         <div className="relative z-10">
           <div className="flex justify-center mb-8">
             <div className="bg-gradient-to-br from-indigo-600 to-purple-700 p-4 rounded-2xl shadow-lg">
