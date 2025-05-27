@@ -1,5 +1,5 @@
 
-export const DEV_URL = 'http://localhost:8000/api';
+export const DEV_URL = 'http://159.65.153.139:8000/api';
 
 export const CURRENT_URL = DEV_URL;
 

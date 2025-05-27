@@ -19,8 +19,8 @@ import UploadVideoLec from "../components/UploadVideoLec";
 const AppRoutes = () => (
   <BrowserRouter>
     <Routes>
-      <Route path="/login" element={<LoginPage />} />
       <Route path="/loginType" element={<LoginType />} />
+      <Route path="/login" element={<LoginPage />} />
       <Route
         path="/"
         element={

@@ -25,7 +25,7 @@ function UploadVideoLec() {
         try {
             setLoading(true);
             const token = localStorage.getItem("jwt");
-            const response = await axios.post("http://localhost:8000/api/videos-lecture/upload", formData, {
+            const response = await axios.post("http://159.65.153.139:8000/api/videos-lecture/upload", formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                     Authorization: `Bearer ${token}`

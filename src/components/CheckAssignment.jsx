@@ -8,7 +8,7 @@ function CheckAssignment() {
   useEffect(() => {
     const fetchAssignments = async () => {
       try {
-        const response = await fetch("http://localhost:8000/api/assignment");
+        const response = await fetch("http://159.65.153.139:8000/api/assignment");
         if (!response.ok) throw new Error("Failed to fetch assignments");
         const data = await response.json();
         setAssignments(data.assignments);
@@ -63,7 +63,7 @@ function CheckAssignment() {
                     </td>
                     <td className="py-3 px-6">
                       <a
-                        href={`http://localhost:8000/uploads/${assignment.assignmentFile}`}
+                        href={`http://159.65.153.139:8000/uploads/${assignment.assignmentFile}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-indigo-600 hover:underline"

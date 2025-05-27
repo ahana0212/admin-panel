@@ -8,11 +8,11 @@ function AllVideoLec() {
     useEffect(() => {
         const fetchVideos = async () => {
             try {
-                const response = await axios.get("http://localhost:8000/api/videos-lecture/all");
+                const response = await axios.get("http://159.65.153.139:8000/api/videos-lecture/all");
                 const formatted = response.data.map(video => ({
                     _id: video._id,
                     title: video.title,
-                    url: `http://localhost:8000/uploads/${video.videoFile}`,  // Local file
+                    url: `http://159.65.153.139:8000/uploads/${video.videoFile}`,  // Local file
                     uploadedAt: new Date(video.uploadedAt).toLocaleDateString()
                 }));
                 setVideos(formatted);

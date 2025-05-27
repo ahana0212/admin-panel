@@ -26,7 +26,7 @@ function UploadAssignment() {
     formData.append("studentId","682b6f39bcb35c3d8e01ec2a");
     try {
       setSubmitting(true);
-      const res = await fetch("http://localhost:8000/api/uploaded-assignment/upload", {
+      const res = await fetch("http://159.65.153.139:8000/api/uploaded-assignment/upload", {
         method: "POST",
         body: formData,
       });

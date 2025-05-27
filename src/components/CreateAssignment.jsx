@@ -34,7 +34,7 @@ function CreateAssignment() {
             const token = localStorage.getItem("jwt");
 
             const res = await axios.post(
-                "http://localhost:8000/api/assignment/create",
+                "http://159.65.153.139:8000/api/assignment/create",
                 formData,
                 {
                     headers: {

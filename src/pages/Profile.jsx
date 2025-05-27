@@ -13,7 +13,7 @@ function Profile() {
     const fetchUser = async () => {
       try {
         const token = localStorage.getItem("jwt");
-        const res = await axios.get(`http://localhost:8000/api/users/${userId}`, {
+        const res = await axios.get(`http://159.65.153.139:8000/api/users/${userId}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

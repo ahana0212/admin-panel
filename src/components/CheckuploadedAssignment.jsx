@@ -10,7 +10,7 @@ function CheckuploadedAssignment() {
         const fetchAssignments = async () => {
             try {
                 const token = localStorage.getItem("jwt");
-                const response = await axios.get('http://localhost:8000/api/uploaded-assignment/all', {
+                const response = await axios.get('http://159.65.153.139:8000/api/uploaded-assignment/all', {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     }

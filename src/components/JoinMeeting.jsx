@@ -11,7 +11,7 @@ function JoinMeeting() {
       try {
         const token = localStorage.getItem("jwt");
 
-        const res = await axios.get("http://localhost:8000/api/meetings", {
+        const res = await axios.get("http://159.65.153.139:8000/api/meetings", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
